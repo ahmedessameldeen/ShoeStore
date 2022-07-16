@@ -30,4 +30,13 @@
     <string name="company">Company: </string>
     <string name="size">"Size: "</string>
     <string name="egp">EGP</string>
+
+    <string name="invalid_shoe_name">Not a valid shoe name</string>
+    <string name="invalid_shoe_company">Not a valid shoe company</string>
+    <string name="invalid_shoe_description">Not a valid description</string>
+    <string name="invalid_shoe_size">Not a valid shoe size</string>
+    <string name="invalid_shoe_price">Not a valid shoe price</string>
+    <string name="addShoe_failed">Adding shoe failed please check your inputs</string>
+    <string name="shoe_added_successfully">Your shoe was added successfully</string>
+
 </resources>
