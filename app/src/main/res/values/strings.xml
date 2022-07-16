@@ -27,4 +27,6 @@
     <string name="add_images">Add images</string>
     <string name="see_instructions">See Instructions</string>
     <string name="instuctions">Instructions</string>
+    <string name="company">Company: </string>
+    <string name="size">"Size: "</string>
 </resources>
