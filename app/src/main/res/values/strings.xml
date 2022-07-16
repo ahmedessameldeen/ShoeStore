@@ -29,4 +29,5 @@
     <string name="instuctions">Instructions</string>
     <string name="company">Company: </string>
     <string name="size">"Size: "</string>
+    <string name="egp">EGP</string>
 </resources>
