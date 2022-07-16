@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
@@ -33,19 +32,18 @@ class LoginFragment : Fragment() {
     ): View {
 
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
-        (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.login)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loginViewModel = ViewModelProvider(this, LoginViewModelFactory())[LoginViewModel::class.java]
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.login)
+        loginViewModel =
+            ViewModelProvider(this, LoginViewModelFactory())[LoginViewModel::class.java]
 
         val usernameEditText = binding.username
         val passwordEditText = binding.password
         val loginButton = binding.login
-        val loadingProgressBar = binding.loading
 
         loginViewModel.loginFormState.observe(viewLifecycleOwner,
             Observer { loginFormState ->
@@ -64,13 +62,13 @@ class LoginFragment : Fragment() {
         loginViewModel.loginResult.observe(viewLifecycleOwner,
             Observer { loginResult ->
                 loginResult ?: return@Observer
-                loadingProgressBar.visibility = View.GONE
                 loginResult.error?.let {
                     showLoginFailed(it)
                 }
                 loginResult.success?.let {
                     updateUiWithUser(it)
                 }
+                loginViewModel._loginResult.value = null
             })
 
         val afterTextChangedListener = object : TextWatcher {
@@ -102,20 +100,18 @@ class LoginFragment : Fragment() {
         }
 
         loginButton.setOnClickListener {
-            tryLogin(loadingProgressBar, usernameEditText, passwordEditText)
+            tryLogin(usernameEditText, passwordEditText)
         }
 
         binding.tvCreateAccount.setOnClickListener {
-            tryLogin(loadingProgressBar, usernameEditText, passwordEditText)
+            tryLogin(usernameEditText, passwordEditText)
         }
     }
 
     private fun tryLogin(
-        loadingProgressBar: ProgressBar,
         usernameEditText: EditText,
         passwordEditText: EditText
     ) {
-        loadingProgressBar.visibility = View.VISIBLE
         loginViewModel.login(
             usernameEditText.text.toString(),
             passwordEditText.text.toString()

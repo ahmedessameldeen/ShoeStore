@@ -1,4 +1,4 @@
-package com.udacity.shoestore.ui.onboarding
+package com.udacity.shoestore.ui.instructions
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,12 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.udacity.shoestore.R
-import com.udacity.shoestore.databinding.FragmentOnboardingBinding
+import com.udacity.shoestore.databinding.FragmentInstructionsBinding
 
-class OnBoardingFragment : Fragment() {
+class InstructionsFragment : Fragment() {
 
-    private lateinit var onBoardingViewModel: OnBoardingViewModel
-    private var _binding: FragmentOnboardingBinding? = null
+    private lateinit var instructionsViewModel: InstructionsViewModel
+    private var _binding: FragmentInstructionsBinding? = null
 
     private val binding get() = _binding!!
 
@@ -23,22 +23,22 @@ class OnBoardingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentOnboardingBinding.inflate(inflater, container, false)
+        _binding = FragmentInstructionsBinding.inflate(inflater, container, false)
         return binding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        onBoardingViewModel = ViewModelProvider(
+        instructionsViewModel = ViewModelProvider(
             this,
-            OnBoardingViewModelFactory()
-        )[OnBoardingViewModel::class.java]
+            InstructionsViewModelFactory()
+        )[InstructionsViewModel::class.java]
 
 
         binding.btnStart.setOnClickListener {
             requireView().findNavController()
-                .navigate(R.id.action_onBoardingFragment_to_instructionsFragment)
+                .navigate(R.id.action_instructionsFragment_to_homeFragment)
         }
     }
 

@@ -6,10 +6,19 @@
     app:startDestination="@id/loginFragment">
 
     <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.udacity.shoestore.ui.home.HomeFragment"
+        android:label="@string/shoes_list"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_addShoeFragment"
+            app:destination="@id/addShoeFragment" />
+    </fragment>
+    <fragment
         android:id="@+id/loginFragment"
         android:name="com.udacity.shoestore.ui.login.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        android:label="@string/login"
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_onBoardingFragment"
             app:destination="@id/onBoardingFragment" />
@@ -17,6 +26,25 @@
     <fragment
         android:id="@+id/onBoardingFragment"
         android:name="com.udacity.shoestore.ui.onboarding.OnBoardingFragment"
-        android:label="OnBoardingFragment" />
+        android:label="@string/onboarding"
+        tools:layout="@layout/fragment_onboarding">
+        <action
+            android:id="@+id/action_onBoardingFragment_to_instructionsFragment"
+            app:destination="@id/instructionsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addShoeFragment"
+        android:name="com.udacity.shoestore.ui.addshoe.AddShoeFragment"
+        android:label="@string/add_shoe"
+        tools:layout="@layout/fragment_add_shoe" />
+    <fragment
+        android:id="@+id/instructionsFragment"
+        android:name="com.udacity.shoestore.ui.instructions.InstructionsFragment"
+        android:label="@string/instuctions"
+        tools:layout="@layout/fragment_instructions">
+        <action
+            android:id="@+id/action_instructionsFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 
 </navigation>

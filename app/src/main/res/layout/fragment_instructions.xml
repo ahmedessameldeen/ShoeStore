@@ -12,31 +12,17 @@
     tools:context=".ui.login.LoginFragment">
 
     <TextView
-        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:text="@string/welcome"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/sp_24"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:text="@string/instructions_description"
         android:lineSpacingExtra="4dp"
-        android:text="@string/onboarding_description"
         android:textColor="@color/darkGray"
         android:textSize="@dimen/sp_16"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_start"
@@ -49,7 +35,7 @@
         android:layout_marginBottom="64dp"
         android:background="@color/colorPrimary"
         android:paddingHorizontal="12dp"
-        android:text="@string/see_instructions"
+        android:text="@string/start_now"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

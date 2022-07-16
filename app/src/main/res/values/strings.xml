@@ -10,9 +10,21 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">Invalid username or password, please check your credentials</string>
     <string name="start_now">Start Now</string>
-    <string name="onboarding_description">Start your journy with ShoeStore to see shoes list and add your favourite shoe style now using + button in home screen</string>
+    <string name="onboarding_description">Welcome to Shoe store please navigate to the next screen to see instructions which will help you to use this app </string>
+    <string name="instructions_description">Start your journy with ShoeStore to see shoes list and add your favourite shoe style now using + button in home screen</string>
     <string name="login">Login</string>
     <string name="onboarding">OnBoarding</string>
     <string name="or">- Or -</string>
-    <string name="create_account">Create account !</string>
+    <string name="create_account">Create account</string>
+    <string name="add_shoe">Add Shoe</string>
+    <string name="prompt_shoe_name">Shoe Name</string>
+    <string name="prompt_shoe_company">Shoe Company</string>
+    <string name="prompt_shoe_description">Shoe Description</string>
+    <string name="prompt_shoe_size">Shoe Size</string>
+    <string name="prompt_shoe_price">Shoe Price</string>
+    <string name="prompt_shoe_images">Shoe Images</string>
+    <string name="shoes_list">Shoes list</string>
+    <string name="add_images">Add images</string>
+    <string name="see_instructions">See Instructions</string>
+    <string name="instuctions">Instructions</string>
 </resources>
