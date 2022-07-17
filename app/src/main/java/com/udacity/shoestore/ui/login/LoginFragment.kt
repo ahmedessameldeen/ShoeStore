@@ -1,5 +1,6 @@
 package com.udacity.shoestore.ui.login
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -67,6 +68,7 @@ class LoginFragment : Fragment() {
                 }
                 loginResult.success?.let {
                     updateUiWithUser(it)
+                    saveUserLoginSuccessToSharedPrefs()
                 }
                 loginViewModel._loginResult.value = null
             })
@@ -108,6 +110,14 @@ class LoginFragment : Fragment() {
         }
     }
 
+    private fun saveUserLoginSuccessToSharedPrefs() {
+        val sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE) ?: return
+        with (sharedPref.edit()) {
+            putBoolean(getString(R.string.login_key), true)
+            apply()
+        }
+    }
+
     private fun tryLogin(
         usernameEditText: EditText,
         passwordEditText: EditText
@@ -119,7 +129,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun updateUiWithUser(model: LoggedInUserView) {
-        val welcome = getString(R.string.welcome) + "   " +  model.displayName
+        val welcome = getString(R.string.welcome) + "   " + model.displayName
         val appContext = context?.applicationContext ?: return
         Toast.makeText(appContext, welcome, Toast.LENGTH_LONG).show()
         navigateToOnBoarding()

@@ -38,5 +38,8 @@
     <string name="invalid_shoe_price">Not a valid shoe price</string>
     <string name="addShoe_failed">Adding shoe failed please check your inputs</string>
     <string name="shoe_added_successfully">Your shoe was added successfully</string>
+    <string name="cancel">cancel</string>
+    <string name="logout">Logout</string>
+    <string name="login_key">LoginKey</string>
 
 </resources>
