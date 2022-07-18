@@ -6,4 +6,14 @@
     <dimen name="sp_16">16sp</dimen>
     <dimen name="sp_14">14sp</dimen>
     <dimen name="sp_12">12sp</dimen>
+    <dimen name="large_spacing_48">48dp</dimen>
+    <dimen name="small_spacing_8">8dp</dimen>
+    <dimen name="medium_spacing_16">16dp</dimen>
+    <dimen name="line_spacing">4dp</dimen>
+    <dimen name="button_padding">12dp</dimen>
+    <dimen name="large_spacing_64">64dp</dimen>
+    <dimen name="medium_spacing_24">24dp</dimen>
+    <dimen name="small_spacing_4">4dp</dimen>
+    <dimen name="medium_spacing_12">12dp</dimen>
+    <dimen name="shoe_item_image_height">150dp</dimen>
 </resources>

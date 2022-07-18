@@ -41,5 +41,6 @@
     <string name="cancel">cancel</string>
     <string name="logout">Logout</string>
     <string name="login_key">LoginKey</string>
+    <string name="save">save</string>
 
 </resources>

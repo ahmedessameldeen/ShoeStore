@@ -35,9 +35,6 @@ class AddShoeFragment : Fragment() {
     ): View {
 
         _binding = FragmentAddShoeBinding.inflate(inflater, container, false)
-        binding.btnAddShoe.setOnClickListener {
-            addShoeViewModel.addShoe()
-        }
         return binding.root
     }
 
@@ -54,6 +51,18 @@ class AddShoeFragment : Fragment() {
         observeFormState()
 
         setupOptionMenu()
+
+        setupViews()
+    }
+
+    private fun setupViews() {
+        binding.btnAddShoe.setOnClickListener {
+            addShoeViewModel.addShoe()
+        }
+
+        binding.btnCancel.setOnClickListener {
+            cancel()
+        }
     }
 
     private fun setupOptionMenu() {
@@ -66,7 +75,7 @@ class AddShoeFragment : Fragment() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
                     R.id.cancel -> {
-                        requireView().findNavController().popBackStack()
+                        cancel()
                         true
                     }
 
@@ -74,6 +83,10 @@ class AddShoeFragment : Fragment() {
                 }
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    }
+
+    private fun cancel() {
+        requireView().findNavController().popBackStack()
     }
 
     private fun observeFormState() {
