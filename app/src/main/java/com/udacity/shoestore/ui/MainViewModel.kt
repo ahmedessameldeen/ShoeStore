@@ -13,4 +13,8 @@ class MainViewModel() : ViewModel() {
     fun addShoe(shoe: Shoe) {
         _shoesList.value = (_shoesList.value?: mutableListOf()).plus(shoe).toMutableList()
     }
+
+    fun logout() {
+        _shoesList.value = mutableListOf()
+    }
 }

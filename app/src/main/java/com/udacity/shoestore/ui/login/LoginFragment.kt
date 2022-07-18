@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
@@ -31,7 +30,6 @@ class LoginFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -41,7 +39,8 @@ class LoginFragment : Fragment() {
         (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.login)
         loginViewModel =
             ViewModelProvider(this, LoginViewModelFactory())[LoginViewModel::class.java]
-
+        binding.lifecycleOwner = this
+        binding.viewModel = loginViewModel
         val usernameEditText = binding.username
         val passwordEditText = binding.password
         val loginButton = binding.login
@@ -51,7 +50,6 @@ class LoginFragment : Fragment() {
                 if (loginFormState == null) {
                     return@Observer
                 }
-                loginButton.isEnabled = loginFormState.isDataValid
                 loginFormState.usernameError?.let {
                     usernameEditText.error = getString(it)
                 }
@@ -73,59 +71,33 @@ class LoginFragment : Fragment() {
                 loginViewModel._loginResult.value = null
             })
 
-        val afterTextChangedListener = object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-                // ignore
-            }
 
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                // ignore
-            }
-
-            override fun afterTextChanged(s: Editable) {
-                loginViewModel.validateCredentials(
-                    usernameEditText.text.toString(),
-                    passwordEditText.text.toString()
-                )
-            }
-        }
-        usernameEditText.addTextChangedListener(afterTextChangedListener)
-        passwordEditText.addTextChangedListener(afterTextChangedListener)
         passwordEditText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                loginViewModel.login(
-                    usernameEditText.text.toString(),
-                    passwordEditText.text.toString()
-                )
+                loginViewModel.login()
             }
             false
         }
 
         loginButton.setOnClickListener {
-            tryLogin(usernameEditText, passwordEditText)
+            tryLogin()
         }
 
         binding.tvCreateAccount.setOnClickListener {
-            tryLogin(usernameEditText, passwordEditText)
+            tryLogin()
         }
     }
 
     private fun saveUserLoginSuccessToSharedPrefs() {
         val sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE) ?: return
-        with (sharedPref.edit()) {
+        with(sharedPref.edit()) {
             putBoolean(getString(R.string.login_key), true)
             apply()
         }
     }
 
-    private fun tryLogin(
-        usernameEditText: EditText,
-        passwordEditText: EditText
-    ) {
-        loginViewModel.login(
-            usernameEditText.text.toString(),
-            passwordEditText.text.toString()
-        )
+    private fun tryLogin() {
+        loginViewModel.login()
     }
 
     private fun updateUiWithUser(model: LoggedInUserView) {

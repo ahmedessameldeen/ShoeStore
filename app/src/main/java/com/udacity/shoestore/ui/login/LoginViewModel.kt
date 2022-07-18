@@ -8,25 +8,28 @@ import com.udacity.shoestore.R
 
 class LoginViewModel() : ViewModel() {
 
+    val username = MutableLiveData<String>()
+    val password = MutableLiveData<String>()
+
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
 
     val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> = _loginResult
 
-    fun login(username: String, password: String) {
-        if (validateCredentials(username, password)) {
-            _loginResult.value = LoginResult(success = LoggedInUserView(username))
+    fun login() {
+        if (validateCredentials()) {
+            _loginResult.value = LoginResult(success = LoggedInUserView(username.value ?: ""))
         } else {
             _loginResult.value = LoginResult(error = R.string.login_failed)
         }
     }
 
-    fun validateCredentials(username: String, password: String): Boolean {
-        return if (!isUserNameValid(username)) {
+    fun validateCredentials(): Boolean {
+        return if (!isUserNameValid(username.value ?: "")) {
             _loginForm.value = LoginFormState(usernameError = R.string.invalid_username)
             false
-        } else if (!isPasswordValid(password)) {
+        } else if (!isPasswordValid(password.value ?: "")) {
             _loginForm.value = LoginFormState(passwordError = R.string.invalid_password)
             false
         } else {

@@ -75,6 +75,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun logout() {
+        mainViewModel.logout()
         requireView().findNavController()
             .navigate(R.id.action_homeFragment_to_loginFragment)
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return

@@ -36,17 +36,7 @@ class AddShoeFragment : Fragment() {
 
         _binding = FragmentAddShoeBinding.inflate(inflater, container, false)
         binding.btnAddShoe.setOnClickListener {
-            addShoeViewModel.addShoe(
-                binding.etShoeName.text.toString(),
-                binding.etShoeCompany.text.toString(),
-                binding.etShoeSize.text.toString().takeIf {
-                    it.isNotEmpty()
-                }?.toDouble() ?: 0.0,
-                binding.etShoePrice.text.toString().takeIf {
-                    it.isNotEmpty()
-                }?.toDouble() ?: 0.0,
-                binding.etShoeDescription.text.toString(),
-            )
+            addShoeViewModel.addShoe()
         }
         return binding.root
     }
@@ -57,12 +47,11 @@ class AddShoeFragment : Fragment() {
             this,
             AddShoeViewModelFactory()
         )[AddShoeViewModel::class.java]
-
+        binding.lifecycleOwner = this
+        binding.viewModel = addShoeViewModel
         observeAddingShoeResult()
 
         observeFormState()
-
-        addChangeListeners()
 
         setupOptionMenu()
     }
@@ -87,50 +76,12 @@ class AddShoeFragment : Fragment() {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
-
-    private fun addChangeListeners() {
-        val afterTextChangedListener = object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-                // ignore
-            }
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                // ignore
-            }
-
-            override fun afterTextChanged(s: Editable) {
-                validateCredentials()
-            }
-        }
-        binding.etShoeName.addTextChangedListener(afterTextChangedListener)
-        binding.etShoeCompany.addTextChangedListener(afterTextChangedListener)
-        binding.etShoeSize.addTextChangedListener(afterTextChangedListener)
-        binding.etShoePrice.addTextChangedListener(afterTextChangedListener)
-        binding.etShoeDescription.addTextChangedListener(afterTextChangedListener)
-    }
-
-    private fun validateCredentials() {
-        addShoeViewModel.validateCredentials(
-            binding.etShoeName.text.toString(),
-            binding.etShoeCompany.text.toString(),
-            binding.etShoeSize.text.toString().takeIf {
-                it.isNotEmpty()
-            }?.toDouble() ?: 0.0,
-            binding.etShoePrice.text.toString().takeIf {
-                it.isNotEmpty()
-            }?.toDouble() ?: 0.0,
-            binding.etShoeDescription.text.toString(),
-        )
-    }
-
     private fun observeFormState() {
         addShoeViewModel.addShoeFormState.observe(viewLifecycleOwner,
             Observer { addShoeFormState ->
                 if (addShoeFormState == null) {
                     return@Observer
                 }
-                binding.btnAddShoe.isEnabled = addShoeFormState.isDataValid
-
                 addShoeFormState.shoeNameError?.let {
                     binding.etShoeName.error = getString(it)
                 }

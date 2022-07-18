@@ -2,6 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.udacity.shoestore.ui.login.LoginViewModel" />
+    </data>
+
+
     <!-- simple one level layout with vertically stacked
          items which needs no constraint to align elements-->
     <LinearLayout
@@ -39,6 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="96dp"
+                android:text="@={viewModel.username}"
                 android:inputType="textEmailAddress|textPersonName"
                 android:selectAllOnFocus="true" />
 
@@ -69,6 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:imeActionLabel="@string/action_sign_in_short"
+                android:text="@={viewModel.password}"
                 android:imeOptions="actionDone"
                 android:inputType="textPassword"
                 android:selectAllOnFocus="true" />
@@ -84,7 +94,6 @@
             android:layout_marginStart="48dp"
             android:layout_marginTop="56dp"
             android:layout_marginEnd="48dp"
-            android:enabled="false"
             android:paddingHorizontal="48dp"
             android:text="@string/action_sign_in" />
 

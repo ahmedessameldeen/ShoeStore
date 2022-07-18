@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.udacity.shoestore.ui.addshoe.AddShoeViewModel" />
+    </data>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -24,6 +31,7 @@
                 android:layout_marginTop="46dp"
                 android:layout_marginEnd="24dp"
                 android:hint="@string/prompt_shoe_name"
+                android:text="@={viewModel.name}"
                 android:inputType="text"
                 android:selectAllOnFocus="true" />
 
@@ -35,6 +43,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
                 android:hint="@string/prompt_shoe_company"
+                android:text="@={viewModel.company}"
                 android:inputType="text"
                 android:selectAllOnFocus="true" />
 
@@ -45,6 +54,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
+                android:text="@={viewModel.size}"
                 android:hint="@string/prompt_shoe_size"
                 android:inputType="number"
                 android:selectAllOnFocus="true" />
@@ -58,6 +68,7 @@
                 android:layout_marginEnd="24dp"
                 android:hint="@string/prompt_shoe_price"
                 android:imeActionLabel="@string/action_sign_in_short"
+                android:text="@={viewModel.price}"
                 android:imeOptions="actionDone"
                 android:inputType="number"
                 android:selectAllOnFocus="true" />
@@ -87,6 +98,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
                     android:layout_marginTop="96dp"
+                    android:text="@={viewModel.desc}"
                     android:gravity="start|top"
                     android:inputType="textMultiLine"
                     android:padding="6dp"
@@ -99,12 +111,11 @@
                 android:id="@+id/btn_add_shoe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginStart="48dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="48dp"
                 android:layout_marginBottom="64dp"
-                android:enabled="false"
                 android:paddingHorizontal="48dp"
                 android:text="@string/add_shoe"
                 android:textAllCaps="false" />

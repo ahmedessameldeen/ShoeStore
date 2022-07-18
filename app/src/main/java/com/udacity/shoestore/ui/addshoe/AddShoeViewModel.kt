@@ -8,6 +8,12 @@ import com.udacity.shoestore.models.Shoe
 
 class AddShoeViewModel() : ViewModel() {
 
+    val name = MutableLiveData<String>()
+    val company = MutableLiveData<String>()
+    val size = MutableLiveData<String>()
+    val price = MutableLiveData<String>()
+    val desc = MutableLiveData<String>()
+
     private val _addShoeForm = MutableLiveData<AddShoeFormState>()
     val addShoeFormState: LiveData<AddShoeFormState> = _addShoeForm
 
@@ -15,15 +21,22 @@ class AddShoeViewModel() : ViewModel() {
     val _addShoeResult = MutableLiveData<AddShoeResult>()
     val addShoeResult: LiveData<AddShoeResult> = _addShoeResult
 
-    fun addShoe(
-        name: String,
-        company: String,
-        size: Double,
-        price: Double,
-        desc: String
-    ) {
-        if (validateCredentials(name, company, size, price, desc)) {
-            _addShoeResult.value = AddShoeResult(success = Shoe(name, size, company,desc, price.toString()))
+    fun addShoe() {
+        val shoeName: String = name.value ?: ""
+        val shoeCompany: String = company.value ?: ""
+        val shoeSize: Double = size.value?.toDouble() ?: 0.0
+        val shoePrice: Double = price.value?.toDouble() ?: 0.0
+        val shoeDesc: String = desc.value ?: ""
+        if (validateCredentials(shoeName, shoeCompany, shoeSize, shoePrice, shoeDesc)) {
+            _addShoeResult.value = AddShoeResult(
+                success = Shoe(
+                    shoeName,
+                    shoeSize,
+                    shoeCompany,
+                    shoeDesc,
+                    shoePrice.toString()
+                )
+            )
         } else {
             _addShoeResult.value = AddShoeResult(error = R.string.addShoe_failed)
         }
