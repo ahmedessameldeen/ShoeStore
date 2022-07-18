@@ -10,6 +10,12 @@
             type="com.udacity.shoestore.models.Shoe" />
     </data>
 
+
+    <!-- ConstraintLayout is more convenient here as
+     we have multiple levels layout so using constraints to
+     align and adjust position would be more suitable for
+     performance-->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
